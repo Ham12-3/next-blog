@@ -5,14 +5,14 @@ import Image from "next/image";
 import { ThemeContext } from "@/context/ThemeContext";
 
 const ThemeToggle = () => {
-  const { toggle } = useContext(ThemeContext);
+  const { toggle ,theme} = useContext(ThemeContext);
 
   return (
     <div 
     style={
       theme === "dark"
-        ? {  background: "white" }
-        : { right: 1, background: "#0f172a" }
+        ? {  backgroundColor: "white" }
+        : { right: 1, backgroundColor: "#0f172a" }
     } className={styles.container} onClick={toggle}>
       <Image src="/moon.png" alt="" height={14} width={14} />
       <div
