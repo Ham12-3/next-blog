@@ -11,7 +11,7 @@ const Menu = () => {
       <div className={styles.items}>
         <Link href="/" className={styles.item}>
           <div className={styles.imageContainer}>
-            <Image src="/travel.png" alt="" fill className={styles.image} />
+           
           </div>
           <div className={styles.textContainer}>
             <span className={`${styles.category} ${styles.travel}`}>
@@ -29,7 +29,7 @@ const Menu = () => {
 
         <Link href="/" className={styles.item}>
           <div className={styles.imageContainer}>
-            <Image src="/fashion.png" alt="" fill className={styles.image} />
+            
           </div>
           <div className={styles.textContainer}>
             <span className={`${styles.category} ${styles.fashion}`}>
@@ -47,7 +47,7 @@ const Menu = () => {
 
         <Link href="/" className={styles.item}>
           <div className={styles.imageContainer}>
-            <Image src="/culture.png" alt="" fill className={styles.image} />
+           
           </div>
           <div className={styles.textContainer}>
             <span className={`${styles.category} ${styles.culture}`}>
@@ -66,7 +66,7 @@ const Menu = () => {
 
         <Link href="/" className={styles.item}>
           <div className={styles.imageContainer}>
-            <Image src="/food.png" alt="" fill className={styles.image} />
+            
           </div>
           <div className={styles.textContainer}>
             <span className={`${styles.category} ${styles.food}`}>
@@ -85,7 +85,7 @@ const Menu = () => {
 
         <Link href="/" className={styles.item}>
           <div className={styles.imageContainer}>
-            <Image src="/style.png" alt="" fill className={styles.image} />
+           
           </div>
           <div className={styles.textContainer}>
             <span className={`${styles.category} ${styles.style}`}>
@@ -102,7 +102,7 @@ const Menu = () => {
         </Link>
         <Link href="/" className={styles.item}>
           <div className={styles.imageContainer}>
-            <Image src="/coding.png" alt="" fill className={styles.image} />
+           
           </div>
           <div className={styles.textContainer}>
             <span className={`${styles.category} ${styles.coding}`}>
@@ -120,10 +120,18 @@ const Menu = () => {
       </div>
 
 
+      <h2 className={styles.subtitle}>Dsicover by topic</h2>
+      <h1 className={styles.title}>Categories</h1>
 
 
-      <h2 className={styles.subtitle}>What's hot</h2>
-      <h1 className={styles.title}>Most Popular</h1>
+      <div className={styles.categoryList}>
+<Link href='/blog?cat=style' className={`${styles.categoryItem} ${styles.style}`}>Styles</Link>
+      </div>
+
+
+
+      <h2 className={styles.subtitle}>Chosen by the editor</h2>
+      <h1 className={styles.title}>Editors Pick</h1>
       <div className={styles.items}>
         <Link href="/" className={styles.item}>
           <div className={styles.imageContainer}>
