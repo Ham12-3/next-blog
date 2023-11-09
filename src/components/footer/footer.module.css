@@ -3,6 +3,7 @@
   padding: 20px 0px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   color: var(--softTextColor);
 }
 
@@ -37,6 +38,7 @@
   flex: 1;
   display: flex;
   justify-content: flex-end;
+  gap: 100px;
 }
 
 
@@ -46,6 +48,41 @@
     gap: 10px;
     font-weight: 300;
 }
+
+.listTitle {
+  font-weight: bold;
+}
 .logoImg {
   border-radius: 50%;
 }
+
+
+@media screen and (max-width:1024px) {
+  .links {
+    gap: 50px;
+  }
+
+}
+
+
+@media screen and (max-width:768px) {
+  .container {
+    flex-direction: column;
+    gap: 50px;
+  }
+  .links {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+}
+
+
+@media screen and (max-width:640px) {
+
+  .links {
+    font-size: 14px;
+  }
+  
+}
+
