@@ -26,7 +26,7 @@ const Card = () => {
           money management advice.
         </p>
 
-<Link href='/'>Read More</Link>
+<Link href='/' className={styles.links}>Read More</Link>
 
       </div>
     </div>
