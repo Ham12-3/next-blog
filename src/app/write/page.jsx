@@ -17,7 +17,7 @@ const WritePage = () => {
       <input type="text" placeholder="Title" className={styles.input} />
 
       <div className={styles.editor}>
-        <button className={styles.button} onClick={() => setOpen(false)}>
+        <button className={styles.button} onClick={() => setOpen(!open)}>
           <Image src="/plus.png" alt="" width={16} height={16} />
         </button>
         {open && (
