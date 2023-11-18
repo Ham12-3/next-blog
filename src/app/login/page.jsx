@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 
 import styles from "./loginPage.module.css";
 import { useRouter } from "next/navigation";
 
+
 const LoginPage = () => {
-  const { data, status } = useSession();
+  const {  status } = useSession();
 
   const router = useRouter();
 
