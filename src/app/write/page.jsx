@@ -13,8 +13,12 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
-import ReactQuill from "react-quill";
 
+
+import dynamic from "next/dynamic";
+const DynamicReactQuill = dynamic(()=>import('react-quill'), {
+  ssr: false
+})
 const WritePage = () => {
   const { status } = useSession();
   const router = useRouter();
@@ -28,35 +32,38 @@ const WritePage = () => {
 
   useEffect(() => {
     const storage = getStorage(app);
-    const upload = () => {
-      const name = new Date().getTime() + file.name;
-      const storageRef = ref(storage, name);
-
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
+    if(typeof window !== 'undefined' && window.document) {
+      const upload = () => {
+        const name = new Date().getTime() + file.name;
+        const storageRef = ref(storage, name);
+  
+        const uploadTask = uploadBytesResumable(storageRef, file);
+  
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+            switch (snapshot.state) {
+              case "paused":
+                console.log("Upload is paused");
+                break;
+              case "running":
+                console.log("Upload is running");
+                break;
+            }
+          },
+          (error) => {},
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              setMedia(downloadURL);
+            });
           }
-        },
-        (error) => {},
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setMedia(downloadURL);
-          });
-        }
-      );
-    };
+        );
+      };
+    }
+   
 
     file && upload();
   }, [file]);
@@ -78,22 +85,22 @@ const WritePage = () => {
       .replace(/^-+|-+$/g, "");
 
   const handleSubmit = async () => {
-    // const res = await fetch("/api/posts", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     title,
-    //     desc: value,
-    //     img: media,
-    //     slug: slugify(title),
-    //     catSlug: catSlug || "style", //If not selected, choose the general category
-    //   }),
-    // }
-    // );
+    const res = await fetch("/api/posts", {
+      method: "POST",
+      body: JSON.stringify({
+        title,
+        desc: value,
+        img: media,
+        slug: slugify(title),
+        catSlug: catSlug || "style", //If not selected, choose the general category
+      }),
+    }
+    );
 
-    // if (res.status === 200) {
-    //   const data = await res.json();
-    //   router.push(`/posts/${data.slug}`);
-    // }
+    if (res.status === 200) {
+      const data = await res.json();
+      router.push(`/posts/${data.slug}`);
+    }
   };
 
   return (
@@ -137,7 +144,7 @@ const WritePage = () => {
             </button>
           </div>
         )}
-        <ReactQuill
+        <DynamicReactQuill
           className={styles.textArea}
           theme="bubble"
           value={value}
